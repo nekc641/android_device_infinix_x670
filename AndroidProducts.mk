@@ -6,9 +6,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_X670.mk
+    $(LOCAL_DIR)/lineage_x670.mk
 
 COMMON_LUNCH_CHOICES := \
-    omni_X670-user \
-    omni_X670-userdebug \
-    omni_X670-eng
+    lineage_x670-user \
+    lineage_x670-userdebug \
+    lineage_x670-eng

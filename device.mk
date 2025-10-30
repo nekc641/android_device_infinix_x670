@@ -1,35 +1,24 @@
-#
-# Copyright (C) 2024 The Android Open Source Project
-# Copyright (C) 2024 SebaUbuntu's TWRP device tree generator
-#
+# device.mk for Infinix X670 ROM
 # SPDX-License-Identifier: Apache-2.0
-#
 
-LOCAL_PATH := device/infinix/X670
-# A/B
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_system=true \
-    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE_system=ext4 \
-    POSTINSTALL_OPTIONAL_system=true
+DEVICE_PATH := device/infinix/x670
 
-# Boot control HAL
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service
+# Inherit base full product (telephony enabled)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-PRODUCT_PACKAGES += \
-    bootctrl.
+# Copy prebuilt kernel + DTB
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/prebuilt/kernel:kernel \
+    $(DEVICE_PATH)/prebuilt/dtb.img:dtb.img
 
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-    bootctrl. \
-    libgptutils \
-    libz \
-    libcutils
+# Device properties
+PRODUCT_DEVICE := x670
+PRODUCT_NAME := lineage_x670
+PRODUCT_BRAND := Infinix
+PRODUCT_MODEL := Infinix X670
+PRODUCT_MANUFACTURER := Infinix
 
-PRODUCT_PACKAGES += \
-    otapreopt_script \
-    cppreopts.sh \
-    update_engine \
-    update_verifier \
-    update_engine_sideload
+# Enable A/B OTA updates
+AB_OTA_UPDATER := true
+
+
